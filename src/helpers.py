@@ -4,7 +4,7 @@ import time
 import torch
 
 from utils.document_loaders import DocumentLoader
-from utils.text_splitters import TextSplitter
+from utils.text_splitters import RecursiveCharacterTextSplitter
 from utils.vectorstores import VectorStore
 from utils.messages import AIMessage, HumanMessage, SystemMessage
 from globals import embedding, retriever, prompt_template, llm, messages
@@ -23,7 +23,7 @@ def index_files(files):
         loader = DocumentLoader(file)
         docs.extend(loader.load())
 
-    text_splitter = TextSplitter(chunk_size=1000, chunk_overlap=200)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000)
     splits = text_splitter.split_documents(docs)
 
     vectorstore = VectorStore.from_documents(documents=splits, embedding=embedding)
