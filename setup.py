@@ -7,6 +7,5 @@ setup(
     name="retrieval-augmented-generation",
     version="0.0.1",
     packages=["retrieval-augmented-generation"],
-    license="MIT",
     install_requires=reqs,
 )
