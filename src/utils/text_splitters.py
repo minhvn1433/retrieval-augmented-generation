@@ -1,6 +1,6 @@
 import copy
 import re
-from typing import List, Optional
+from typing import List
 
 from utils.documents import Document
 
@@ -19,6 +19,7 @@ class CharacterTextSplitter:
         Raises:
             ValueError: If `chunk_overlap` exceeds `chunk_size`.
         """
+
         if chunk_overlap > chunk_size:
             raise ValueError(
                 f"Chunk overlap size ({chunk_overlap}) is larger than chunk size ({chunk_size})."
@@ -40,14 +41,14 @@ class CharacterTextSplitter:
         return chunks
 
     def create_documents(
-        self, texts: List[str], metadatas: Optional[List[dict]] = None
+        self, texts: List[str], metadatas: List[dict | None] | None = None
     ) -> List[Document]:
         """
         Create documents from texts.
 
         Args:
             texts (List[str]): List of texts.
-            metadatas (Optional[List[dict]], optional): List of dictionaries of metadata. Defaults to None.
+            metadatas (List[dict | None] | None, optional): List of dictionaries of metadata. Defaults to None.
 
         Returns:
             List[Document]: List of documents.
@@ -57,7 +58,7 @@ class CharacterTextSplitter:
 
         for i, text in enumerate(texts):
             for chunk in self.split_text(text):
-                metadata = copy.deepcopy(metadatas[i])
+                metadata = copy.deepcopy(metadatas[i]) if metadatas else None
                 new_doc = Document(page_content=chunk, metadata=metadata)
                 documents.append(new_doc)
 
@@ -96,14 +97,14 @@ class RecursiveCharacterTextSplitter:
     """Splitting text by recursively look at characters."""
 
     def __init__(
-        self, chunk_size: int = 1000, separators: Optional[List[str]] = None
+        self, chunk_size: int = 1000, separators: List[str] | None = None
     ) -> None:
         """
         Create a new RecursiveCharacterTextSplitter.
 
         Args:
             chunk_size (int, optional): Maximum size of chunks. Defaults to 1000.
-            separators (Optional[List[str]], optional): List of separators. Defaults to None.
+            separators (List[str] | None, optional): List of separators. Defaults to None.
         """
 
         self.chunk_size = chunk_size
@@ -174,14 +175,14 @@ class RecursiveCharacterTextSplitter:
         return self._split_text(text, self.separators)
 
     def create_documents(
-        self, texts: List[str], metadatas: Optional[List[dict]] = None
+        self, texts: List[str], metadatas: List[dict | None] | None = None
     ) -> List[Document]:
         """
         Create documents from texts.
 
         Args:
             texts (List[str]): List of texts.
-            metadatas (Optional[List[dict]], optional): List of dictionaries of metadata. Defaults to None.
+            metadatas (List[dict | None] | None, optional): List of dictionaries of metadata. Defaults to None.
 
         Returns:
             List[Document]: List of documents.
@@ -191,7 +192,7 @@ class RecursiveCharacterTextSplitter:
 
         for i, text in enumerate(texts):
             for chunk in self.split_text(text):
-                metadata = copy.deepcopy(metadatas[i])
+                metadata = copy.deepcopy(metadatas[i]) if metadatas else None
                 new_doc = Document(page_content=chunk, metadata=metadata)
                 documents.append(new_doc)
 
