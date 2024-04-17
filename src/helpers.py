@@ -4,7 +4,7 @@ import time
 import torch
 
 from utils.document_loaders import DocumentLoader
-from utils.text_splitters import RecursiveCharacterTextSplitter
+from utils.text_splitters import CharacterTextSplitter, RecursiveCharacterTextSplitter
 from utils.vectorstores import VectorStore
 from utils.messages import AIMessage, HumanMessage, SystemMessage
 from globals import embedding, retriever, prompt_template, llm, messages
