@@ -1,14 +1,31 @@
 import docx
 import fitz
+from typing import List
 
 from utils.documents import Document
 
 
 class DocumentLoader:
-    def __init__(self, document_path):
+    """Load documents from various file formats: .txt, .pdf, .doc, .docx."""
+
+    def __init__(self, document_path: str) -> None:
+        """
+        Create a new DocumentLoader.
+
+        Args:
+            document_path (str): Path to document.
+        """
+
         self.document_path = document_path
 
-    def load(self):
+    def load(self) -> List[Document]:
+        """
+        Load documents from file.
+
+        Returns:
+            List[Document]: List of documents.
+        """
+
         documents = []
 
         if self.document_path.endswith(".pdf"):

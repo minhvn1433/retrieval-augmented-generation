@@ -3,7 +3,7 @@ class Document:
 
     def __init__(self, page_content: str, metadata: dict | None = None) -> None:
         """
-        Initialize a Document.
+        Create a new Document.
 
         Args:
             page_content (str): String of page content.
