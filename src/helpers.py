@@ -125,6 +125,7 @@ Question:
     )
     chat.append({"role": "assistant", "content": response})
 
+    # 9. STREAM
     history[-1][1] = ""
     for character in response:
         history[-1][1] += character
