@@ -2,7 +2,7 @@ import copy
 import re
 from typing import List
 
-from utils.documents import Document
+from utils.document import Document
 
 
 class CharacterTextSplitter:
