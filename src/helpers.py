@@ -65,7 +65,7 @@ def index_files(files):
     docs = load_documents(files)
 
     # 2. SPLIT
-    text_splitter = CharacterTextSplitter(chunk_size=512, chunk_overlap=256)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=2048)
     split_docs = text_splitter.split_documents(docs)
 
     # 3. EMBED
@@ -88,7 +88,7 @@ def bot(history):
     # 6. RE-RANK
     cross_scores = cross_encoder.predict([(query, text) for text in unique_texts])
     reranked_texts = [
-        text for _, text in sorted(zip(cross_scores, unique_texts), reverse=True)[:5]
+        text for _, text in sorted(zip(cross_scores, unique_texts), reverse=True)[:7]
     ]
     reordered_texts = reordering_texts(reranked_texts)
 
