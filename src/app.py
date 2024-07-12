@@ -2,7 +2,6 @@ import gradio as gr
 
 from helpers import clear_cuda_cache, index_files, bot, user
 
-
 with gr.Blocks() as demo:
     with gr.Row(variant="panel"):
         with gr.Column(scale=2):
